@@ -208,7 +208,7 @@ namespace System.Drawing.IconLib
             {
                 ICONDIRENTRY iconDirEntry;
                 iconDirEntry.bColorCount    = (byte) mEncoder.Header.biClrUsed;
-                iconDirEntry.bHeight        = (byte) mEncoder.Header.biHeight;
+                iconDirEntry.bHeight        = (byte) (mEncoder.Header.biHeight / 2);
                 iconDirEntry.bReserved      = 0;
                 iconDirEntry.bWidth         = (byte) mEncoder.Header.biWidth;
                 iconDirEntry.dwBytesInRes   = (uint) (sizeof(BITMAPINFOHEADER) + 
@@ -227,7 +227,7 @@ namespace System.Drawing.IconLib
             {
                 GRPICONDIRENTRY groupIconDirEntry;
                 groupIconDirEntry.bColorCount    = (byte) mEncoder.Header.biClrUsed;
-                groupIconDirEntry.bHeight        = (byte) mEncoder.Header.biHeight;
+                groupIconDirEntry.bHeight        = (byte) (mEncoder.Header.biHeight / 2);
                 groupIconDirEntry.bReserved      = 0;
                 groupIconDirEntry.bWidth         = (byte) mEncoder.Header.biWidth;
                 groupIconDirEntry.dwBytesInRes   = (uint) IconImageSize;

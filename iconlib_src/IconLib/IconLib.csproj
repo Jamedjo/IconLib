@@ -7,7 +7,7 @@
     <ProjectGuid>{CE53747F-D2E6-4E1E-9EF4-A0AE02671B1D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IconLib</RootNamespace>
+    <RootNamespace></RootNamespace>
     <AssemblyName>IconLib</AssemblyName>
     <SccProjectName>
     </SccProjectName>
@@ -87,7 +87,7 @@
     <EmbeddedResource Include="System\Drawing\IconLib\Resource.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>System.Drawing.IconLIb</CustomToolNamespace>
+      <CustomToolNamespace>System.Drawing.IconLib</CustomToolNamespace>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
