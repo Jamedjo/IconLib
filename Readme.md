@@ -31,6 +31,11 @@ The first parameter can be either the path to the png, or a `Bitmap` object. The
 
 ### History
 
+### IconLib 0.74 (12/30/2017)
+
+Fixed a small problem with saving icon files (bHeight in ICONDIRENTRY and GRPICONDIRENTRY had doubled value).
+Namespace corrections for the resource designer file.
+
 ### IconLib 0.73 (01/31/2008)
 
 Fixed a small problem with indexed 8bpp images.
