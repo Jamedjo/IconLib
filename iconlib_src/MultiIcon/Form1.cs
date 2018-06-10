@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Diagnostics;
+using System.Reflection;
 using System.Drawing.Imaging;
 using System.Drawing.IconLib;
 using System.Drawing.IconLib.ColorProcessing;
@@ -25,6 +27,8 @@ namespace MultiIconTester
         {
             InitializeComponent();
             dlgSave.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            string iconLibVersion = GetVersions();
+            this.Text = iconLibVersion;
         }
         #endregion
 
@@ -218,6 +222,21 @@ namespace MultiIconTester
                     return "4-bit 16 Colors";
             }
             return "Unknown";
+        }
+
+        private string GetVersions() {
+            StringBuilder versionString = new StringBuilder();
+            AssemblyName name = AssemblyName.GetAssemblyName(Application.ExecutablePath);
+            string exeName = name.Name + ".exe";
+            FileVersionInfo info = FileVersionInfo.GetVersionInfo(exeName);
+            versionString.Append(exeName + " : ");
+            versionString.Append(info.FileVersion + ", ");
+
+            string libName = "IconLib.dll";
+            info = FileVersionInfo.GetVersionInfo(libName);
+            versionString.Append(libName + " : ");
+            versionString.Append(info.FileVersion);
+            return versionString.ToString();
         }
         #endregion
 
