@@ -20,6 +20,7 @@
 namespace System.Drawing.IconLib.Exceptions
 {
     [Author("Franco, Gustavo")]
+    [Serializable]
     public class InvalidICLFileException : Exception
     {
         #region Constructors

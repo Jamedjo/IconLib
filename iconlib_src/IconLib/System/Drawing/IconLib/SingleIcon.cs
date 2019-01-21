@@ -192,8 +192,11 @@ namespace System.Drawing.IconLib
                 // then make them XP format Icons
                 if (Tools.BitsFromPixelFormat(XORImage.PixelFormat) == 16)
                 {
-                    XORImage.Dispose();
-                    ANDImage.Dispose();
+                    //XORImage.Dispose();
+                    //XORImage = null;
+                    //ANDImage.Dispose();
+                    //ANDImage = null;
+                    //above commented code is done in finally block
 
                     return Add(icon.ToBitmap(), Color.Transparent);
                 }
@@ -381,8 +384,10 @@ namespace System.Drawing.IconLib
         public struct Enumerator : IEnumerator<IconImage>, IDisposable, IEnumerator
         {
             #region Variables Declaration
+            [NonSerialized]
             private SingleIcon  mList;
             private int         mIndex;
+            [NonSerialized]
             private IconImage   mCurrent;
             #endregion
 

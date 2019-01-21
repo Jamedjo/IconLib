@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.Drawing.IconLib;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
+using System.Security.Permissions;
 
 namespace System.Drawing.IconLib.ColorProcessing
 {
@@ -42,7 +43,7 @@ namespace System.Drawing.IconLib.ColorProcessing
         public EuclideanQuantizer(IPaletteQuantizer quantizer, IDithering dithering)
         {
             if (quantizer == null)
-                throw new Exception("param 'quantizer' cannot be null");
+                throw new ArgumentNullException("quantizer", "param 'quantizer' cannot be null");
 
             mQuantizer  = quantizer;
             mDithering  = dithering;
@@ -52,10 +53,12 @@ namespace System.Drawing.IconLib.ColorProcessing
         #region Methods
         public unsafe Bitmap Convert(Bitmap source, PixelFormat outputFormat)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
             DateTime dt1 = DateTime.Now;
 
             if ((outputFormat & PixelFormat.Indexed) != PixelFormat.Indexed)
-                throw new Exception("Output format must be one of the indexed formats");
+                throw new ArgumentException("Output format must be one of the indexed formats", "outputFormat");
 
             Bitmap bmpTrg = new Bitmap(source.Width, source.Height, outputFormat);
 
@@ -80,7 +83,7 @@ namespace System.Drawing.IconLib.ColorProcessing
                     newPalette = mQuantizer.CreatePalette(source, 256, 8);                
                     break;
                 default:
-                    throw new Exception("Indexed format not supported");
+                    throw new ArgumentException("Indexed format not supported", "outputFormat");
             }
 
             DateTime dt2 = DateTime.Now;

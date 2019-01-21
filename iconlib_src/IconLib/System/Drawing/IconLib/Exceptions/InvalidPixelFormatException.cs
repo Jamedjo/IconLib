@@ -20,6 +20,7 @@ using System.Drawing.Imaging;
 namespace System.Drawing.IconLib.Exceptions
 {
     [Author("Franco, Gustavo")]
+    [Serializable]
     public class InvalidPixelFormatException : Exception
     {
         #region Constructors

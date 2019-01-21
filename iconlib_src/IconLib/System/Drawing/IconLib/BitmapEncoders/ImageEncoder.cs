@@ -21,6 +21,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 namespace System.Drawing.IconLib.BitmapEncoders
 {
@@ -45,6 +46,8 @@ namespace System.Drawing.IconLib.BitmapEncoders
         {
             get
             {
+                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
                 MemoryStream ms = new MemoryStream();
 
                 // ICONDIR

@@ -21,6 +21,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 namespace System.Drawing.IconLib
 {
@@ -392,6 +393,8 @@ namespace System.Drawing.IconLib
 
         public unsafe void Write(Stream stream)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
             BinaryWriter br = new BinaryWriter(stream);
             br.Write(rscAlignShift);
 

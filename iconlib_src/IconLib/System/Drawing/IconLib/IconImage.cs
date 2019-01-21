@@ -22,6 +22,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Drawing.IconLib.Exceptions;
 using System.Drawing.IconLib.BitmapEncoders;
 using System.Drawing.IconLib.EncodingFormats;
@@ -102,6 +103,8 @@ namespace System.Drawing.IconLib
         {
             get
             {
+                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
                 IntPtr hDCScreen = Win32.GetDC(IntPtr.Zero);
 
                 // Image
@@ -140,6 +143,8 @@ namespace System.Drawing.IconLib
         {
             get
             {
+                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
                 IntPtr hDCScreen = Win32.GetDC(IntPtr.Zero);
 
                 // Image
@@ -242,6 +247,8 @@ namespace System.Drawing.IconLib
         #region Methods
         public unsafe void Set(Bitmap bitmap, Bitmap bitmapMask, Color transparentColor)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
             // We need to rotate the images, but we don't want to mess with the source image, lets create a clone
             Bitmap image = (Bitmap) bitmap.Clone();
             Bitmap mask  = bitmapMask != null ? (Bitmap) bitmapMask.Clone() : null;
