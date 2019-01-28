@@ -31,7 +31,7 @@ The first parameter can be either the path to the png, or a `Bitmap` object. The
 
 ### History
 
-### IconLib 0.75 (01/28/2019)
+### IconLib 1.0 (01/28/2019)
 
 some bugfixes for 64bit windows
 codeanalysis fixes
