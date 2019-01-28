@@ -31,6 +31,15 @@ The first parameter can be either the path to the png, or a `Bitmap` object. The
 
 ### History
 
+### IconLib 0.75 (01/28/2019)
+
+some bugfixes for 64bit windows
+codeanalysis fixes
+
+added projectfiles for .net4.0 with MIT License
+signed assembly and installer for GAC added
+PublicKeyToken=d586bf32134c8d42, AssemblyVersion=4.0
+
 ### IconLib 0.74 (12/30/2017)
 
 Fixed a small problem with saving icon files (bHeight in ICONDIRENTRY and GRPICONDIRENTRY had doubled value).

@@ -112,7 +112,7 @@ namespace System.Drawing.IconLib
                 IntPtr bits;
                 bitmapInfo.icHeader             = mEncoder.Header;
                 bitmapInfo.icHeader.biHeight   /= 2;
-                bitmapInfo.icColors             = Tools.StandarizePalette(mEncoder.Colors);
+                bitmapInfo.icColors             = Tools.StandardizePalette(mEncoder.Colors);
                 IntPtr hDCScreenOUTBmp          = Win32.CreateCompatibleDC(hDCScreen);
                 IntPtr hBitmapOUTBmp            = Win32.CreateDIBSection(hDCScreenOUTBmp, ref bitmapInfo, 0, out bits, IntPtr.Zero, 0);
                 Marshal.Copy(mEncoder.XOR, 0, bits, mEncoder.XOR.Length);

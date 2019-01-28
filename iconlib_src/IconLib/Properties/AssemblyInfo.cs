@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -7,7 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("IconLib")]
 [assembly: AssemblyDescription("")]
+#if Net4
+[assembly: AssemblyConfiguration(".NET4")]
+#else
 [assembly: AssemblyConfiguration("")]
+#endif
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("IconLib")]
 [assembly: AssemblyCopyright("Copyright © Franco, Gustavo 2006")]
@@ -34,5 +38,9 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
+#if Net4
+[assembly: AssemblyVersion("4.0.0.0")]
+#else
 [assembly: AssemblyVersion("0.74.0.0")]
+#endif
 [assembly: AssemblyFileVersion("0.75.0.0")]

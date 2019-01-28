@@ -392,7 +392,6 @@ namespace MultiIconTester
             this.MinimizeBox = false;
             this.Name = "FormIconBrowser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Icon Browser 0.73";
             this.Load += new System.EventHandler(this.FormIconBrowser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxXORImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxANDImage)).EndInit();
