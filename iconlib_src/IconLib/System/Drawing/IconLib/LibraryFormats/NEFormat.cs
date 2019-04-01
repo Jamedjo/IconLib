@@ -22,6 +22,7 @@ using System.Text;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 using System.Drawing.IconLib.Exceptions;
 
@@ -124,6 +125,8 @@ namespace System.Drawing.IconLib.EncodingFormats
 
         public unsafe void Save(MultiIcon multiIcon, Stream stream)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+            
             //Lets prepare the complete file in memory, then we dump everything to a file
             IMAGE_DOS_HEADER    dos_header      = new IMAGE_DOS_HEADER();
             IMAGE_OS2_HEADER    os2_header      = new IMAGE_OS2_HEADER();

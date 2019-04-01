@@ -19,6 +19,7 @@
 namespace System.Drawing.IconLib.Exceptions
 {
     [Author("Franco, Gustavo")]
+    [Serializable]
     public class InvalidMultiIconFileException : Exception
     {
         #region Constructors

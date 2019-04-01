@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -7,12 +7,19 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("IconLib")]
 [assembly: AssemblyDescription("")]
+#if Net4
+[assembly: AssemblyConfiguration(".NET4")]
+#else
 [assembly: AssemblyConfiguration("")]
+#endif
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("IconLib")]
 [assembly: AssemblyCopyright("Copyright © Franco, Gustavo 2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+//[assembly: System.Security.SecurityCritical]
+//[assembly: System.Security.SecurityRules(System.Security.SecurityRuleSet.Level2)]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -31,5 +38,9 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.73.0.0")]
-[assembly: AssemblyFileVersion("0.73.0.0")]
+#if Net4
+[assembly: AssemblyVersion("4.0.0.0")]
+#else
+[assembly: AssemblyVersion("0.74.0.0")]
+#endif
+[assembly: AssemblyFileVersion("1.0.0.0")]

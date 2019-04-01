@@ -21,6 +21,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Drawing.IconLib.Exceptions;
 
 namespace System.Drawing.IconLib.EncodingFormats
@@ -81,6 +82,8 @@ namespace System.Drawing.IconLib.EncodingFormats
 
         public unsafe void Save(MultiIcon multiIcon, Stream stream)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
             if (multiIcon.SelectedIndex == -1)
                 return;
 

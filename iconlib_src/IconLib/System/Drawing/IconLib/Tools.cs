@@ -59,7 +59,7 @@ namespace System.Drawing.IconLib
 			bitmap.UnlockBits(bitmapData);
         }
 
-        public static RGBQUAD[] StandarizePalette(RGBQUAD[] palette)
+        public static RGBQUAD[] StandardizePalette(RGBQUAD[] palette)
         {
             RGBQUAD[] newPalette = new RGBQUAD[256];
             for(int i=0; i<palette.Length; i++)

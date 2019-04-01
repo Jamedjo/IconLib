@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.IconLib.Exceptions;
 using System.Drawing.Imaging;
 using System.Collections;
-using System.Drawing.IconLIb;
+using System.Drawing.IconLib;
 
 namespace System.Drawing.IconLib.EncodingFormats
 {
@@ -33,6 +33,7 @@ namespace System.Drawing.IconLib.EncodingFormats
     {
         #region Variables Declaration
         private static List<string> mIconsIDs;
+        private object lockObj = new object();
         #endregion
 
         #region Methods
@@ -82,7 +83,8 @@ namespace System.Drawing.IconLib.EncodingFormats
                     throw new InvalidFileException();
 
                 List<string> iconsIDs;
-                lock (typeof(PEFormat))
+                //lock (typeof(PEFormat))
+                lock (lockObj)
                 {
                     mIconsIDs = new List<string>();
                     bool bResult = Win32.EnumResourceNames(hLib, (IntPtr) ResourceType.RT_GROUP_ICON, new Win32.EnumResNameProc(EnumResNameProc), IntPtr.Zero);
@@ -100,7 +102,7 @@ namespace System.Drawing.IconLib.EncodingFormats
                     IntPtr hRsrc = IntPtr.Zero;
 
                     if (Win32.IS_INTRESOURCE(id))
-                        hRsrc = Win32.FindResource(hLib, int.Parse(id), (IntPtr) ResourceType.RT_GROUP_ICON);
+                        hRsrc = Win32.FindResource(hLib, (IntPtr)int.Parse(id), (IntPtr) ResourceType.RT_GROUP_ICON);
                     else
                         hRsrc = Win32.FindResource(hLib, id, (IntPtr) ResourceType.RT_GROUP_ICON);
 
@@ -204,7 +206,7 @@ namespace System.Drawing.IconLib.EncodingFormats
                         buffer = ms.GetBuffer();
 
                         // Update resource but it doesn't write to disk yet
-                        bResult = Win32.UpdateResource(updPtr, (int) ResourceType.RT_ICON, iconIndex, 0,  buffer, (uint) ms.Length);
+                        bResult = Win32.UpdateResource(updPtr, (IntPtr) ResourceType.RT_ICON, (IntPtr)iconIndex, 0,  buffer, (uint) ms.Length);
                         
                         iconIndex++;
 
@@ -230,13 +232,13 @@ namespace System.Drawing.IconLib.EncodingFormats
                     if (int.TryParse(singleIcon.Name, out id))
                     {
                         // Write id as an integer
-                        bResult = Win32.UpdateResource(updPtr, (int) ResourceType.RT_GROUP_ICON, (IntPtr) id, 0, buffer, (uint) ms.Length);
+                        bResult = Win32.UpdateResource(updPtr, (IntPtr) ResourceType.RT_GROUP_ICON, (IntPtr) id, 0, buffer, (uint) ms.Length);
                     }
                     else
                     {
                         // Write id as string
                         IntPtr pName = Marshal.StringToHGlobalAnsi(singleIcon.Name.ToUpper());
-                        bResult = Win32.UpdateResource(updPtr, (int) ResourceType.RT_GROUP_ICON, pName, 0, buffer, (uint) ms.Length);
+                        bResult = Win32.UpdateResource(updPtr, (IntPtr) ResourceType.RT_GROUP_ICON, pName, 0, buffer, (uint) ms.Length);
                         Marshal.FreeHGlobal(pName);
                     }
                 }

@@ -22,6 +22,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Drawing.IconLib.Exceptions;
 using System.Drawing.IconLib.BitmapEncoders;
 using System.Drawing.IconLib.EncodingFormats;
@@ -102,6 +103,8 @@ namespace System.Drawing.IconLib
         {
             get
             {
+                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
                 IntPtr hDCScreen = Win32.GetDC(IntPtr.Zero);
 
                 // Image
@@ -109,7 +112,7 @@ namespace System.Drawing.IconLib
                 IntPtr bits;
                 bitmapInfo.icHeader             = mEncoder.Header;
                 bitmapInfo.icHeader.biHeight   /= 2;
-                bitmapInfo.icColors             = Tools.StandarizePalette(mEncoder.Colors);
+                bitmapInfo.icColors             = Tools.StandardizePalette(mEncoder.Colors);
                 IntPtr hDCScreenOUTBmp          = Win32.CreateCompatibleDC(hDCScreen);
                 IntPtr hBitmapOUTBmp            = Win32.CreateDIBSection(hDCScreenOUTBmp, ref bitmapInfo, 0, out bits, IntPtr.Zero, 0);
                 Marshal.Copy(mEncoder.XOR, 0, bits, mEncoder.XOR.Length);
@@ -140,6 +143,8 @@ namespace System.Drawing.IconLib
         {
             get
             {
+                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
                 IntPtr hDCScreen = Win32.GetDC(IntPtr.Zero);
 
                 // Image
@@ -208,7 +213,7 @@ namespace System.Drawing.IconLib
             {
                 ICONDIRENTRY iconDirEntry;
                 iconDirEntry.bColorCount    = (byte) mEncoder.Header.biClrUsed;
-                iconDirEntry.bHeight        = (byte) mEncoder.Header.biHeight;
+                iconDirEntry.bHeight        = (byte) (mEncoder.Header.biHeight / 2);
                 iconDirEntry.bReserved      = 0;
                 iconDirEntry.bWidth         = (byte) mEncoder.Header.biWidth;
                 iconDirEntry.dwBytesInRes   = (uint) (sizeof(BITMAPINFOHEADER) + 
@@ -227,7 +232,7 @@ namespace System.Drawing.IconLib
             {
                 GRPICONDIRENTRY groupIconDirEntry;
                 groupIconDirEntry.bColorCount    = (byte) mEncoder.Header.biClrUsed;
-                groupIconDirEntry.bHeight        = (byte) mEncoder.Header.biHeight;
+                groupIconDirEntry.bHeight        = (byte) (mEncoder.Header.biHeight / 2);
                 groupIconDirEntry.bReserved      = 0;
                 groupIconDirEntry.bWidth         = (byte) mEncoder.Header.biWidth;
                 groupIconDirEntry.dwBytesInRes   = (uint) IconImageSize;
@@ -242,6 +247,8 @@ namespace System.Drawing.IconLib
         #region Methods
         public unsafe void Set(Bitmap bitmap, Bitmap bitmapMask, Color transparentColor)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
             // We need to rotate the images, but we don't want to mess with the source image, lets create a clone
             Bitmap image = (Bitmap) bitmap.Clone();
             Bitmap mask  = bitmapMask != null ? (Bitmap) bitmapMask.Clone() : null;

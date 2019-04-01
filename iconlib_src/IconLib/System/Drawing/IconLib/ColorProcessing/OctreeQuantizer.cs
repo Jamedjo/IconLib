@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing.Imaging;
+using System.Security.Permissions;
 
 namespace System.Drawing.IconLib.ColorProcessing
 {
@@ -35,6 +36,8 @@ namespace System.Drawing.IconLib.ColorProcessing
         #region Methods
         public unsafe ColorPalette CreatePalette(Bitmap image, int maxColors, int bitsPerPixel)
         {
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
             int nPad;
             byte* pbBits;
             ushort* pwBits;
@@ -50,7 +53,7 @@ namespace System.Drawing.IconLib.ColorProcessing
             Node[] reducibleNodes = new Node[9];
 
             if (maxColors > Math.Pow(2, bitsPerPixel))
-                throw new Exception("param maxColors out of range, maximum " + Math.Pow(2, bitsPerPixel) + " colors for " + bitsPerPixel + " bits");
+                throw new ArgumentException("param maxColors out of range, maximum " + Math.Pow(2, bitsPerPixel) + " colors for " + bitsPerPixel + " bits", "bitsPerPixel");
 
             //// Initialize octree variables
             tree = null;
