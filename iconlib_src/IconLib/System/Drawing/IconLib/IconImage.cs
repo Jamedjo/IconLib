@@ -96,7 +96,11 @@ namespace System.Drawing.IconLib
 
         public unsafe Bitmap Transparent
         {
-            get {return Icon.ToBitmap();}
+            get
+            {
+                using (Icon icon = Icon)
+                    return icon.ToBitmap();
+            }
         }
 
         public Bitmap Image
